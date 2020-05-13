@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Image from './components/Image';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			img: 'https://via.placeholder.com/500',
+		};
+	}
+	updateImg(val) {
+		this.setState({
+			img: val,
+		});
+	}
+	reset() {
+		this.setState({
+			img: 'https://via.placeholder.com/500',
+		});
+	}
+	render() {
+		return (
+			<div className='App'>
+				<input
+					type='text'
+					placeholder='Enter URL to change img'
+					onChange={e => this.updateImg(e.target.value)}
+					value={this.state.img}
+				/>
+				<button onClick={() => this.reset()}>Reset</button>
+				<Image img={this.state.img} />
+			</div>
+		);
+	}
 }
 
 export default App;
